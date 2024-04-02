@@ -1,0 +1,57 @@
+<div class="container d-flex justify-content-center">
+
+<div class="col-4">
+  <div class="card shadow round mt-5">
+    <div class="card-header">
+      <h3 class="text-center">Sistema de carros</h3>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="formSignIn" *ngIf="isSignInFormVisible">
+        <div class="mb-3">
+          <label class="form-label">Login</label>
+          <input type="text" class="form-control" formControlName="login">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignIn('login')">O email deve conter um formato valido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignIn('password')">A password deve conter no minimo 6 caracteres</div>
+        </div>
+        <button type="button" class="btn btn-primary" [disabled]="!formSignIn.valid" (click)="submmitSignInForm()">SignIn</button>
+        <button type="button" class="btn btn-primary" (click)="goToSignUp()">SignUp</button>
+      </form>
+
+      <form [formGroup]="formSignUp" *ngIf="isSignUpFormVisible">
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" formControlName="firstName">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('firstName')">O firstName deve ser preenchido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('lastName')">O lastName deve ser preenchido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="text" class="form-control" formControlName="email">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('email')">O email deve conter um formato valido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Login</label>
+          <input type="text" class="form-control" formControlName="login">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('login')">O login deve ser preenchido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('password')">A password deve conter no minimo 6 caracteres</div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="goBackToSignin()">Back to SignIn</button>
+        <button type="button" class="btn btn-primary" [disabled]="!formSignUp.valid" (click)="submmitSignUpForm()">SignUp</button>
+      </form>
+    </div>
+  </div>
+
+</div>
