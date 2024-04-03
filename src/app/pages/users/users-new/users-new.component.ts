@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from './../users-list/shared/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../users-list/shared/user.model';
 
@@ -11,6 +11,8 @@ import { User } from '../users-list/shared/user.model';
 })
 export class UsersNewComponent implements OnInit{
   public formUser:FormGroup; 
+
+  @Output() newUser:EventEmitter<User> = new EventEmitter();
 
   constructor(private fb:FormBuilder, private usersService:UsersService, private toast:ToastrService){
     this.formUser = this.buildFormUser();
@@ -39,12 +41,14 @@ public isFormControlInvalid(controlName:string):boolean{
 
 public saveNewUser():void{
   const newUser:User = this.formUser.value as User;
-  this.formUser.reset;
+  
 
   this.usersService.saveNew(newUser).subscribe(
     res => {
       
       this.toast.success("New user has been saved!");
+      this.formUser.reset;
+      this.newUser.emit(res);
     },
     err => {
       

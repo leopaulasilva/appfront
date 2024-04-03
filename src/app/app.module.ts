@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { AuthGuard } from './security/auth.guard';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -42,7 +43,8 @@ import { AuthGuard } from './security/auth.guard';
       provide:HTTP_INTERCEPTORS,
       useClass:AuthInterceptor,
       multi:true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
