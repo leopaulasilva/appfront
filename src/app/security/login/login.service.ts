@@ -7,7 +7,7 @@ import { environment } from "../../../environments/environment";
   providedIn:'root',
 })
 
-export class Loginservice{
+export class LoginService{
   constructor(private httpClient:HttpClient){
 
   }
@@ -26,11 +26,11 @@ export class Loginservice{
     )
   }
 
-  public signUp(firstName:string,lastName:string,email:string,login:string, password:string){
+  public signUp(firstName:string,lastName:string,email:string,birthday:string,phone:string,login:string, password:string){
     const url = `${environment.baseUrlBackend}/auth/signup`;
 
 
-    return this.httpClient.post(url, {firstName, lastName, email, login, password}, {responseType:'json'}).pipe(
+    return this.httpClient.post(url, {firstName, lastName, email, birthday,phone, login, password}, {responseType:'json'}).pipe(
       map((data)=>this.setTokenLocalStorage(data)),
       catchError((err)=>{
         this.removerTokenLocalStorage();
@@ -40,10 +40,16 @@ export class Loginservice{
   }
 
 
-public getToken():string | null{
-  return localStorage.getItem(environment.token);
-
-}
+  getToken(): string | null {
+    // Check if localStorage is available before accessing it
+    if (typeof localStorage !== 'undefined') {
+      // Access localStorage only if it's available
+      return localStorage.getItem('token');
+    } else {
+      // Return null or handle the case where localStorage is not available
+      return null;
+    }
+  }
 
 private setTokenLocalStorage(response: any) {
   const { type, token, _ } = response;

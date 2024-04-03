@@ -11,7 +11,12 @@ import { LoginComponent } from './security/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './security/auth.interceptor';
+import { AuthGuard } from './security/auth.guard';
+
+
+
 
 
 @NgModule({
@@ -20,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     LayoutComponent,
     HomeComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    AuthGuard,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

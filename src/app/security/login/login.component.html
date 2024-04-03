@@ -34,10 +34,23 @@
           <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('lastName')">O lastName deve ser preenchido</div>
         </div>
         <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="text" class="form-control" formControlName="email">
+          <label class="form-label">Email address</label>
+          <input type="text" class="form-control" formControlName="email" placeholder="name@example.com">
           <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('email')">O email deve conter um formato valido</div>
         </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Birthday</label>
+          <input type="date" class="form-control" formControlName="birthday">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('birthday')">O birthday deve ser preenchido</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" formControlName="phone">
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('phone')">O phone deve ser preenchido</div>
+        </div>
+        
+
         <div class="mb-3">
           <label class="form-label">Login</label>
           <input type="text" class="form-control" formControlName="login">
@@ -46,7 +59,7 @@
         <div class="mb-3">
           <label class="form-label">Password</label>
           <input type="password" class="form-control" formControlName="password">
-          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('password')">A password deve conter no minimo 6 caracteres</div>
+          <div class="form-text text-danger" *ngIf="isForControlInvalidSignUp('password')">Your password must be at least 6 characters long.</div>
         </div>
         <button type="button" class="btn btn-primary" (click)="goBackToSignin()">Back to SignIn</button>
         <button type="button" class="btn btn-primary" [disabled]="!formSignUp.valid" (click)="submmitSignUpForm()">SignUp</button>

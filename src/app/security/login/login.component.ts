@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Loginservice } from './login.service';
+import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   public formSignUp: FormGroup; // Form group for signup
 
 
-  constructor(private fb:FormBuilder, private loginService: Loginservice, private route:Router, private toast:ToastrService){
+  constructor(private fb:FormBuilder, private loginService:LoginService, private route:Router, private toast:ToastrService){
     this.formSignIn = this.createFormSignIn();
     this.formSignUp = this.createFormSignUp();
   }
@@ -41,6 +42,8 @@ export class LoginComponent implements OnInit {
     return this.fb.group({
       firstName:["",[Validators.required]],
       lastName:["",[Validators.required]],
+      birthday:["",],
+      phone:["",],
       login:["",[Validators.required]],
       email:["",[Validators.required, Validators.email]],
       password:["",[Validators.required, Validators.minLength(6)]]
@@ -74,10 +77,10 @@ public isForControlInvalidSignUp(controlName:string):boolean{
 
 public submmitSignUpForm() {
 
-  const {firstName,lastName,email,login,password}=this.formSignUp.value;
+  const {firstName,lastName,email,birthday,phone,login,password}=this.formSignUp.value;
   this.formSignUp.reset;
 
-  this.loginService.signUp(firstName,lastName,email,login,password).subscribe(
+  this.loginService.signUp(firstName,lastName,email,birthday,phone,login,password).subscribe(
     res=>{
       this.toast.success("SignUp efetuado com sucesso");
       this.route.navigate([''])
