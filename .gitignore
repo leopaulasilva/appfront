@@ -11,11 +11,7 @@ node_modules
 /.idea
 /.vscode
 
-# Compiled output
-*.js
-*.js.map
-*.css
-*.html
+
 
 # Logs
 *.log
