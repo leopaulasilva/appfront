@@ -15,7 +15,9 @@ const routes: Routes = [
     canActivate:[AuthGuard],
     children:[
       {path:'',component:HomeComponent},
-      {path:'users',loadChildren:()=>import('./pages/users/users.module').then(m=>m.UsersModule)}
+      {path:'users',loadChildren:()=>import('./pages/users/users.module').then(m=>m.UsersModule)},
+      {path:'cars',loadChildren:()=>import('./pages/cars/cars.module').then(n=>n.CarsModule)}
+
     ]
   },
 

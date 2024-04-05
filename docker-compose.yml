@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  appfront:
+    container_name: appfront
+    build: .
+    image: appfront:latest
+    ports:
+      - 81:80
+    expose:
+      - 81
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

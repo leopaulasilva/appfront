@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --watch --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:appfront": "node dist/appfront/server/server.mjs"
@@ -28,7 +28,9 @@
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "zone.js": "~0.14.3",
+    "jspdf": "^2.5.1",
+    "file-saver": "^2.0.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.2",
