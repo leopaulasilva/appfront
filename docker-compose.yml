@@ -1,14 +1,13 @@
 version: '3.8'
-
 services:
   appfront:
     container_name: appfront
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     image: appfront:latest
     ports:
-      - 81:80
-    expose:
-      - 81
+      - "81:80"
     networks:
       - internalnet
 
