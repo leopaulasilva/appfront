@@ -30,15 +30,22 @@
       
       <div class="mb-3">
         <label class="form-label">License Plate</label>
-        <input type="date" class="form-control" formControlName="licensePlate">
+        <input type="text" class="form-control" formControlName="licensePlate">
         <div class="form-text text-danger" *ngIf="isFormControlInvalid('licensePlate')">License plate must be filled</div>
       </div>
       
+
+
       <div class="mb-3">
         <label class="form-label">User</label>
-        <input type="date" class="form-control" formControlName="userId">
-        <div class="form-text text-danger" *ngIf="isFormControlInvalid('userId')">UserId must be filled</div>
+        <select class="form-select" formControlName="user">
+          <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }} {{ user.lastName }}</option>
+        </select>
+        <div class="form-text text-danger" *ngIf="isFormControlInvalid('user')">UserId must be selected</div>
+        
       </div>
+
+
       <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" [disabled]="!formEditCar.valid" data-bs-dismiss="modal">Save</button>
       </div>

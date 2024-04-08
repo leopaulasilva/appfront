@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { CarsService } from './../cars-list/shared/car.service';
 import { Car } from '../cars-list/shared/car.model';
 import { DatePipe } from '@angular/common';
+import { User } from '../../users/users-list/shared/user.model';
+import { UsersService } from '../../users/users-list/shared/user.service';
+
 
 @Component({
   selector: 'app-cars-edit',
@@ -16,12 +19,16 @@ export class CarsEditComponent implements OnInit{
   
   @Output() editCar:EventEmitter<Car> = new EventEmitter();
 
+  public listUsers:Array<User>=[];
+  users!: User[];
+
   constructor(private datePipe: DatePipe, 
     private activatedRoute:ActivatedRoute, 
     private fb:FormBuilder, 
     private carsService:CarsService, 
     private toast:ToastrService,
-    private router:Router){
+    private router:Router,
+    private usersService:UsersService){
     this.formEditCar = this.buildFormEditCar();
     
   }
@@ -36,6 +43,12 @@ export class CarsEditComponent implements OnInit{
         this.toast.error("Failed to fetch car!");
       }
     )
+
+    this.usersService.listAll().subscribe(
+      res => {
+        this.users = res; // Assign listUsers to users
+      }
+    );
   }
 
   private buildFormEditCar(): FormGroup {
