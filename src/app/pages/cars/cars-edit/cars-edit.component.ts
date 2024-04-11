@@ -37,6 +37,8 @@ export class CarsEditComponent implements OnInit{
     console.log('car id: ',carId)
     this.carsService.listById(carId).subscribe(
       res => {
+        const userId = res.user?.id;
+        this.formEditCar.get('userId')?.setValue(userId);
         this.formEditCar.patchValue(res)
       },
       err=>{
@@ -53,6 +55,7 @@ export class CarsEditComponent implements OnInit{
 
   private buildFormEditCar(): FormGroup {
     return this.fb.group({
+      id:[null,[Validators.required]],
       model:["",[Validators.required]],
       carYear:["",[Validators.required]],
       color:["",Validators.required],
